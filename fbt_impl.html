@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Atomic Study - Full Binary Tree</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+        <h2>TREES</h2>
+        
+        <div class="syllabus-item">
+            <a href="index.html" class="syllabus-module">1.0 & 2.0 ARRAYS</a>
+        </div>
+
+        <div class="syllabus-item">
+            <a href="ll_impl.html" class="syllabus-module">3.0 LINKED LIST</a>
+        </div>
+
+        <div class="syllabus-item">
+            <a href="fbt_impl.html" class="syllabus-module active-module">4.0 FULL BINARY TREE</a>
+            
+            <div class="syllabus-subheading">4.0 FULL BINARY TREE</div>
+            <div class="atomic-node active" data-target="sec-4-0-0">4.0.0 FBT Theory & Properties</div>
+            <div class="atomic-node" data-target="sec-4-0-1">4.0.1 isFullBinaryTree Logic</div>
+            <div class="atomic-node" data-target="sec-4-0-2">4.0.2 Main Driver</div>
+            <div class="atomic-node" data-target="sec-4-0-3">4.0.3 Full FBT Code</div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <button class="mobile-nav-btn" id="mobile-nav-btn">☰ Topics</button>
+
+        <div class="left-pane" id="theory-pane">
+            
+            <div id="sec-4-0-0" class="content-section active">
+                <h3>4.0.0 Full Binary Tree Theory & Properties</h3>
+                
+                <iframe src="animation_fbt.html" class="animation-embed" title="FBT Validation Logic"></iframe>
+
+                <div class="theory-line">
+                    <div class="content-text">A Full Binary Tree is strictly defined as a tree where every node has exactly 0 or exactly 2 children.</div>
+                    <button class="explain-btn" onclick="showExplanation('t4_1')">➔</button>
+                </div>
+                <div class="theory-line">
+                    <div class="content-text">Property 1: A full binary tree with I internal nodes will mathematically always have I + 1 leaf nodes.</div>
+                    <button class="explain-btn" onclick="showExplanation('t4_2')">➔</button>
+                </div>
+                <div class="theory-line">
+                    <div class="content-text">Property 2: The total number of nodes in a Full Binary Tree is equal to 2I + 1.</div>
+                    <button class="explain-btn" onclick="showExplanation('t4_3')">➔</button>
+                </div>
+            </div>
+
+            <div id="sec-4-0-1" class="content-section code-section">
+                <h3>4.0.1 isFullBinaryTree Logic</h3>
+                <div class="code-line"><div class="content-text"><span class="co-keyword">int</span> <span class="co-func">isFullBinaryTree</span>(<span class="co-keyword">struct</span> <span class="co-func">node</span>* <span class="co-var">root</span>){</div><button class="explain-btn" onclick="showExplanation('c4_1')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">int</span> <span class="co-var">left</span>, <span class="co-var">right</span>;</div><button class="explain-btn" onclick="showExplanation('c4_2')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">if</span> (<span class="co-var">root</span> == <span class="co-keyword">NULL</span>)</div><button class="explain-btn" onclick="showExplanation('c4_3')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-keyword">return</span> <span class="co-number">1</span>;</div><button class="explain-btn" onclick="showExplanation('c4_4')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">if</span> (<span class="co-var">root</span>-&gt;<span class="co-var">left</span> == <span class="co-keyword">NULL</span> &amp;&amp; <span class="co-var">root</span>-&gt;<span class="co-var">right</span> == <span class="co-keyword">NULL</span>)</div><button class="explain-btn" onclick="showExplanation('c4_5')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-keyword">return</span> <span class="co-number">1</span>;</div><button class="explain-btn" onclick="showExplanation('c4_6')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">else if</span> (<span class="co-var">root</span>-&gt;<span class="co-var">left</span> &amp;&amp; <span class="co-var">root</span>-&gt;<span class="co-var">right</span>) {</div><button class="explain-btn" onclick="showExplanation('c4_7')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-var">left</span> = <span class="co-func">isFullBinaryTree</span>(<span class="co-var">root</span>-&gt;<span class="co-var">left</span>);</div><button class="explain-btn" onclick="showExplanation('c4_8')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-var">right</span> = <span class="co-func">isFullBinaryTree</span>(<span class="co-var">root</span>-&gt;<span class="co-var">right</span>);</div><button class="explain-btn" onclick="showExplanation('c4_9')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-keyword">return</span> (<span class="co-var">left</span> &amp;&amp; <span class="co-var">right</span>);</div><button class="explain-btn" onclick="showExplanation('c4_10')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text">}</div><button class="explain-btn" onclick="showExplanation('c4_11')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">return</span> <span class="co-number">0</span>;</div><button class="explain-btn" onclick="showExplanation('c4_12')">➔</button></div>
+                <div class="code-line"><div class="content-text">}</div><button class="explain-btn" onclick="showExplanation('c4_13')">➔</button></div>
+            </div>
+
+            <!-- 4.0.2 Main Driver -->
+            <div id="sec-4-0-2" class="content-section code-section">
+                <h3>4.0.2 Main Driver</h3>
+                <div class="code-line"><div class="content-text"><span class="co-keyword">int</span> <span class="co-func">main</span>(){</div><button class="explain-btn" onclick="showExplanation('c4_14')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">struct</span> <span class="co-func">node</span>* <span class="co-var">root</span> = <span class="co-func">createNode</span>(<span class="co-number">10</span>);</div><button class="explain-btn" onclick="showExplanation('c4_15')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-var">root</span>-&gt;<span class="co-var">left</span> = <span class="co-func">createNode</span>(<span class="co-number">20</span>);</div><button class="explain-btn" onclick="showExplanation('c4_16')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-var">root</span>-&gt;<span class="co-var">right</span> = <span class="co-func">createNode</span>(<span class="co-number">30</span>);</div><button class="explain-btn" onclick="showExplanation('c4_17')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-var">root</span>-&gt;<span class="co-var">left</span>-&gt;<span class="co-var">left</span> = <span class="co-func">createNode</span>(<span class="co-number">40</span>);</div><button class="explain-btn" onclick="showExplanation('c4_18')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-var">root</span>-&gt;<span class="co-var">left</span>-&gt;<span class="co-var">right</span> = <span class="co-func">createNode</span>(<span class="co-number">50</span>);</div><button class="explain-btn" onclick="showExplanation('c4_19')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">printf</span>(<span class="co-string">"root is %d\n"</span>, <span class="co-var">root</span>-&gt;<span class="co-var">data</span>);</div><button class="explain-btn" onclick="showExplanation('c4_20')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">printf</span>(<span class="co-string">"Left node is %d\n"</span>, <span class="co-var">root</span>-&gt;<span class="co-var">left</span>-&gt;<span class="co-var">data</span>);</div><button class="explain-btn" onclick="showExplanation('c4_21')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">printf</span>(<span class="co-string">"right node is %d\n"</span>, <span class="co-var">root</span>-&gt;<span class="co-var">right</span>-&gt;<span class="co-var">data</span>);</div><button class="explain-btn" onclick="showExplanation('c4_22')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">if</span>(<span class="co-func">isFullBinaryTree</span>(<span class="co-var">root</span>))</div><button class="explain-btn" onclick="showExplanation('c4_23')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-func">printf</span>(<span class="co-string">"FULL Binary tree"</span>);</div><button class="explain-btn" onclick="showExplanation('c4_24')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">else</span>{</div><button class="explain-btn" onclick="showExplanation('c4_25')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-func">printf</span>(<span class="co-string">"NOT a FULL Binary tree"</span>);</div><button class="explain-btn" onclick="showExplanation('c4_25')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text">}</div><button class="explain-btn" onclick="showExplanation('c4_25')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">return</span> <span class="co-number">0</span>;</div><button class="explain-btn" onclick="showExplanation('c4_26')">➔</button></div>
+                <div class="code-line"><div class="content-text">}</div><button class="explain-btn" onclick="showExplanation('c4_14')">➔</button></div>
+            </div>
+
+            <!-- 4.0.3 Full FBT Code -->
+            <div id="sec-4-0-3" class="content-section code-section">
+                <h3>4.0.3 Full FBT Code</h3>
+                <div class="code-line"><div class="content-text"><span class="co-keyword">struct</span> <span class="co-func">node</span> {</div><button class="explain-btn" onclick="showExplanation('c3_1')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">struct</span> <span class="co-func">node</span> * <span class="co-var">left</span>;</div><button class="explain-btn" onclick="showExplanation('c3_2')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">int</span> <span class="co-var">data</span>;</div><button class="explain-btn" onclick="showExplanation('c3_3')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">struct</span> <span class="co-func">node</span> * <span class="co-var">right</span>;</div><button class="explain-btn" onclick="showExplanation('c3_4')">➔</button></div>
+                <div class="code-line"><div class="content-text">};</div><button class="explain-btn" onclick="showExplanation('c3_5')">➔</button></div>
+                <div class="code-line"><br></div>
+
+                <div class="code-line"><div class="content-text"><span class="co-keyword">struct</span> <span class="co-func">node</span>* <span class="co-func">createNode</span>(<span class="co-keyword">int</span> <span class="co-var">data</span>){</div><button class="explain-btn" onclick="showExplanation('c3_6')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">struct</span> <span class="co-func">node</span>* <span class="co-var">newNode</span> = <span class="co-func">malloc</span>(<span class="co-keyword">sizeof</span>(<span class="co-keyword">struct</span> <span class="co-func">node</span>));</div><button class="explain-btn" onclick="showExplanation('c3_7')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-var">newNode</span>-&gt;<span class="co-var">data</span> = <span class="co-var">data</span>;</div><button class="explain-btn" onclick="showExplanation('c3_8')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-var">newNode</span>-&gt;<span class="co-var">left</span> = <span class="co-keyword">NULL</span>;</div><button class="explain-btn" onclick="showExplanation('c3_9')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-var">newNode</span>-&gt;<span class="co-var">right</span> = <span class="co-keyword">NULL</span>;</div><button class="explain-btn" onclick="showExplanation('c3_10')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">return</span> <span class="co-var">newNode</span>;</div><button class="explain-btn" onclick="showExplanation('c3_11')">➔</button></div>
+                <div class="code-line"><div class="content-text">}</div><button class="explain-btn" onclick="showExplanation('c3_12')">➔</button></div>
+                <div class="code-line"><br></div>
+
+                <div class="code-line"><div class="content-text"><span class="co-keyword">int</span> <span class="co-func">isFullBinaryTree</span>(<span class="co-keyword">struct</span> <span class="co-func">node</span>* <span class="co-var">root</span>){</div><button class="explain-btn" onclick="showExplanation('c4_1')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">int</span> <span class="co-var">left</span>, <span class="co-var">right</span>;</div><button class="explain-btn" onclick="showExplanation('c4_2')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">if</span> (<span class="co-var">root</span> == <span class="co-keyword">NULL</span>)</div><button class="explain-btn" onclick="showExplanation('c4_3')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-keyword">return</span> <span class="co-number">1</span>;</div><button class="explain-btn" onclick="showExplanation('c4_4')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">if</span> (<span class="co-var">root</span>-&gt;<span class="co-var">left</span> == <span class="co-keyword">NULL</span> &amp;&amp; <span class="co-var">root</span>-&gt;<span class="co-var">right</span> == <span class="co-keyword">NULL</span>)</div><button class="explain-btn" onclick="showExplanation('c4_5')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-keyword">return</span> <span class="co-number">1</span>;</div><button class="explain-btn" onclick="showExplanation('c4_6')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">else if</span> (<span class="co-var">root</span>-&gt;<span class="co-var">left</span> &amp;&amp; <span class="co-var">root</span>-&gt;<span class="co-var">right</span>) {</div><button class="explain-btn" onclick="showExplanation('c4_7')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-var">left</span> = <span class="co-func">isFullBinaryTree</span>(<span class="co-var">root</span>-&gt;<span class="co-var">left</span>);</div><button class="explain-btn" onclick="showExplanation('c4_8')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-var">right</span> = <span class="co-func">isFullBinaryTree</span>(<span class="co-var">root</span>-&gt;<span class="co-var">right</span>);</div><button class="explain-btn" onclick="showExplanation('c4_9')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-keyword">return</span> (<span class="co-var">left</span> &amp;&amp; <span class="co-var">right</span>);</div><button class="explain-btn" onclick="showExplanation('c4_10')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text">}</div><button class="explain-btn" onclick="showExplanation('c4_11')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">return</span> <span class="co-number">0</span>;</div><button class="explain-btn" onclick="showExplanation('c4_12')">➔</button></div>
+                <div class="code-line"><div class="content-text">}</div><button class="explain-btn" onclick="showExplanation('c4_13')">➔</button></div>
+                <div class="code-line"><br></div>
+
+                <div class="code-line"><div class="content-text"><span class="co-keyword">int</span> <span class="co-func">main</span>(){</div><button class="explain-btn" onclick="showExplanation('c4_14')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">struct</span> <span class="co-func">node</span>* <span class="co-var">root</span> = <span class="co-func">createNode</span>(<span class="co-number">10</span>);</div><button class="explain-btn" onclick="showExplanation('c4_15')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-var">root</span>-&gt;<span class="co-var">left</span> = <span class="co-func">createNode</span>(<span class="co-number">20</span>);</div><button class="explain-btn" onclick="showExplanation('c4_16')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-var">root</span>-&gt;<span class="co-var">right</span> = <span class="co-func">createNode</span>(<span class="co-number">30</span>);</div><button class="explain-btn" onclick="showExplanation('c4_17')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-var">root</span>-&gt;<span class="co-var">left</span>-&gt;<span class="co-var">left</span> = <span class="co-func">createNode</span>(<span class="co-number">40</span>);</div><button class="explain-btn" onclick="showExplanation('c4_18')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-var">root</span>-&gt;<span class="co-var">left</span>-&gt;<span class="co-var">right</span> = <span class="co-func">createNode</span>(<span class="co-number">50</span>);</div><button class="explain-btn" onclick="showExplanation('c4_19')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">printf</span>(<span class="co-string">"root is %d\n"</span>, <span class="co-var">root</span>-&gt;<span class="co-var">data</span>);</div><button class="explain-btn" onclick="showExplanation('c4_20')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">printf</span>(<span class="co-string">"Left node is %d\n"</span>, <span class="co-var">root</span>-&gt;<span class="co-var">left</span>-&gt;<span class="co-var">data</span>);</div><button class="explain-btn" onclick="showExplanation('c4_21')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">printf</span>(<span class="co-string">"right node is %d\n"</span>, <span class="co-var">root</span>-&gt;<span class="co-var">right</span>-&gt;<span class="co-var">data</span>);</div><button class="explain-btn" onclick="showExplanation('c4_22')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">if</span>(<span class="co-func">isFullBinaryTree</span>(<span class="co-var">root</span>))</div><button class="explain-btn" onclick="showExplanation('c4_23')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-func">printf</span>(<span class="co-string">"FULL Binary tree"</span>);</div><button class="explain-btn" onclick="showExplanation('c4_24')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">else</span>{</div><button class="explain-btn" onclick="showExplanation('c4_25')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-func">printf</span>(<span class="co-string">"NOT a FULL Binary tree"</span>);</div><button class="explain-btn" onclick="showExplanation('c4_25')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text">}</div><button class="explain-btn" onclick="showExplanation('c4_25')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">return</span> <span class="co-number">0</span>;</div><button class="explain-btn" onclick="showExplanation('c4_26')">➔</button></div>
+                <div class="code-line"><div class="content-text">}</div><button class="explain-btn" onclick="showExplanation('c4_14')">➔</button></div>
+            </div>
+            
+        </div>
+        
+        <div class="right-pane">
+            <h3>Logical Breakdown</h3>
+            <div id="explanation-content">
+                <span class="placeholder-text">Click the ➔ arrow on any line to reveal the underlying logic here.</span>
+            </div>
+        </div>
+    </div>
+    <script src="database.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

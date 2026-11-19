@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Atomic Study - Linked List Trees</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+        <h2>TREES</h2>
+        
+        <div class="syllabus-item">
+            <a href="index.html" class="syllabus-module">1.0 & 2.0 ARRAYS</a>
+        </div>
+
+        <div class="syllabus-item">
+            <a href="ll_impl.html" class="syllabus-module active-module">3.0 LINKED LIST</a>
+            
+            <div class="syllabus-subheading">3.0 IMPLEMENTATION</div>
+            <div class="atomic-node active" data-target="sec-3-0-0">3.0.0 LL Theory & Structure</div>
+            <div class="atomic-node" data-target="sec-3-0-1">3.0.1 Create Node</div>
+            <div class="atomic-node" data-target="sec-3-0-2">3.0.2 Create Tree (Recursive)</div>
+            <div class="atomic-node" data-target="sec-3-0-3">3.0.3 Main Driver</div>
+            <div class="atomic-node" data-target="sec-3-0-4">3.0.4 Full LL Code</div>
+        </div>
+
+        <div class="syllabus-item">
+            <a href="fbt_impl.html" class="syllabus-module">4.0 FULL BINARY TREE</a>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <button class="mobile-nav-btn" id="mobile-nav-btn">☰ Topics</button>
+
+        <div class="left-pane" id="theory-pane">
+            
+            <div id="sec-3-0-0" class="content-section active">
+                <h3>3.0.0 Linked List Theory & Structure</h3>
+                
+                <iframe src="animation_ll.html" class="animation-embed" title="Dynamic Memory Allocation"></iframe>
+
+                <div class="theory-line">
+                    <div class="content-text">LL implementation uses dynamic memory allocation, so there is no need to know the tree size in advance.</div>
+                    <button class="explain-btn" onclick="showExplanation('t3_1')">➔</button>
+                </div>
+                <div class="theory-line">
+                    <div class="content-text">It removes size restrictions and handles skewed trees perfectly without formulaic memory waste, though it requires extra memory for pointers.</div>
+                    <button class="explain-btn" onclick="showExplanation('t3_2')">➔</button>
+                </div>
+                <div class="theory-line">
+                    <div class="content-text">Mathematical rule: If there are n nodes in a binary tree, the number of NULL links is exactly p = n + 1.</div>
+                    <button class="explain-btn" onclick="showExplanation('t3_3')">➔</button>
+                </div>
+            </div>
+
+            <!-- 3.0.1 Create Node -->
+            <div id="sec-3-0-1" class="content-section code-section">
+                <h3>3.0.1 Create Node</h3>
+                <div class="code-line"><div class="content-text"><span class="co-keyword">struct</span> <span class="co-func">node</span> {</div><button class="explain-btn" onclick="showExplanation('c3_1')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">struct</span> <span class="co-func">node</span> * <span class="co-var">left</span>;</div><button class="explain-btn" onclick="showExplanation('c3_2')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">int</span> <span class="co-var">data</span>;</div><button class="explain-btn" onclick="showExplanation('c3_3')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">struct</span> <span class="co-func">node</span> * <span class="co-var">right</span>;</div><button class="explain-btn" onclick="showExplanation('c3_4')">➔</button></div>
+                <div class="code-line"><div class="content-text">};</div><button class="explain-btn" onclick="showExplanation('c3_5')">➔</button></div>
+                <div class="code-line"><br></div>
+                <div class="code-line"><div class="content-text"><span class="co-keyword">struct</span> <span class="co-func">node</span>* <span class="co-func">createNode</span>(<span class="co-keyword">int</span> <span class="co-var">data</span>){</div><button class="explain-btn" onclick="showExplanation('c3_6')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">struct</span> <span class="co-func">node</span>* <span class="co-var">newNode</span> = <span class="co-func">malloc</span>(<span class="co-keyword">sizeof</span>(<span class="co-keyword">struct</span> <span class="co-func">node</span>));</div><button class="explain-btn" onclick="showExplanation('c3_7')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-var">newNode</span>-&gt;<span class="co-var">data</span> = <span class="co-var">data</span>;</div><button class="explain-btn" onclick="showExplanation('c3_8')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-var">newNode</span>-&gt;<span class="co-var">left</span> = <span class="co-keyword">NULL</span>;</div><button class="explain-btn" onclick="showExplanation('c3_9')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-var">newNode</span>-&gt;<span class="co-var">right</span> = <span class="co-keyword">NULL</span>;</div><button class="explain-btn" onclick="showExplanation('c3_10')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">return</span> <span class="co-var">newNode</span>;</div><button class="explain-btn" onclick="showExplanation('c3_11')">➔</button></div>
+                <div class="code-line"><div class="content-text">}</div><button class="explain-btn" onclick="showExplanation('c3_12')">➔</button></div>
+            </div>
+
+            <!-- 3.0.2 Create Tree -->
+            <div id="sec-3-0-2" class="content-section code-section">
+                <h3>3.0.2 Create Tree (Recursive)</h3>
+                <div class="code-line"><div class="content-text"><span class="co-keyword">struct</span> <span class="co-func">node</span> *<span class="co-func">createTree</span>(){</div><button class="explain-btn" onclick="showExplanation('c3_13')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">int</span> <span class="co-var">input</span>, <span class="co-var">data</span>;</div><button class="explain-btn" onclick="showExplanation('c3_14')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">printf</span>(<span class="co-string">"Do you want to enter data, 0 for No, 1 for yes: "</span>);</div><button class="explain-btn" onclick="showExplanation('c3_15')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">scanf</span>(<span class="co-string">"%d"</span>,&amp;<span class="co-var">input</span>);</div><button class="explain-btn" onclick="showExplanation('c3_16')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">if</span> (!<span class="co-var">input</span>)</div><button class="explain-btn" onclick="showExplanation('c3_17')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-keyword">return</span> <span class="co-keyword">NULL</span>;</div><button class="explain-btn" onclick="showExplanation('c3_18')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">else</span>{</div><button class="explain-btn" onclick="showExplanation('c3_19')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-keyword">struct</span> <span class="co-func">node</span> *<span class="co-var">newNode</span> = <span class="co-func">malloc</span>(<span class="co-keyword">sizeof</span>(<span class="co-keyword">struct</span> <span class="co-func">node</span>));</div><button class="explain-btn" onclick="showExplanation('c3_20')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-func">printf</span>(<span class="co-string">"Enter data: "</span>);</div><button class="explain-btn" onclick="showExplanation('c3_21')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-func">scanf</span>(<span class="co-string">"%d"</span>,&amp;<span class="co-var">data</span>);</div><button class="explain-btn" onclick="showExplanation('c3_22')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-var">newNode</span>-&gt;<span class="co-var">data</span> = <span class="co-var">data</span>;</div><button class="explain-btn" onclick="showExplanation('c3_23')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-func">printf</span>(<span class="co-string">"Left child of %d\n"</span>, <span class="co-var">newNode</span>-&gt;<span class="co-var">data</span>);</div><button class="explain-btn" onclick="showExplanation('c3_24')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-var">newNode</span>-&gt;<span class="co-var">left</span> = <span class="co-func">createTree</span>();</div><button class="explain-btn" onclick="showExplanation('c3_25')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-func">printf</span>(<span class="co-string">"Right child of %d\n"</span>, <span class="co-var">newNode</span>-&gt;<span class="co-var">data</span>);</div><button class="explain-btn" onclick="showExplanation('c3_26')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-var">newNode</span>-&gt;<span class="co-var">right</span> = <span class="co-func">createTree</span>();</div><button class="explain-btn" onclick="showExplanation('c3_27')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-keyword">return</span> <span class="co-var">newNode</span>;</div><button class="explain-btn" onclick="showExplanation('c3_28')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text">}</div><button class="explain-btn" onclick="showExplanation('c3_29')">➔</button></div>
+                <div class="code-line"><div class="content-text">}</div><button class="explain-btn" onclick="showExplanation('c3_30')">➔</button></div>
+            </div>
+
+            <!-- 3.0.3 Main Driver -->
+            <div id="sec-3-0-3" class="content-section code-section">
+                <h3>3.0.3 Main Driver</h3>
+                <div class="code-line"><div class="content-text"><span class="co-keyword">int</span> <span class="co-func">main</span>(){</div><button class="explain-btn" onclick="showExplanation('c3_31')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">struct</span> <span class="co-func">node</span>* <span class="co-var">root</span> = <span class="co-func">createNode</span>(<span class="co-number">10</span>);</div><button class="explain-btn" onclick="showExplanation('c3_32')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-var">root</span>-&gt;<span class="co-var">left</span> = <span class="co-func">createNode</span>(<span class="co-number">20</span>);</div><button class="explain-btn" onclick="showExplanation('c3_33')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-var">root</span>-&gt;<span class="co-var">right</span> = <span class="co-func">createNode</span>(<span class="co-number">30</span>);</div><button class="explain-btn" onclick="showExplanation('c3_34')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-var">root</span>-&gt;<span class="co-var">left</span>-&gt;<span class="co-var">left</span> = <span class="co-func">createNode</span>(<span class="co-number">40</span>);</div><button class="explain-btn" onclick="showExplanation('c3_35')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-var">root</span>-&gt;<span class="co-var">left</span>-&gt;<span class="co-var">right</span> = <span class="co-func">createNode</span>(<span class="co-number">50</span>);</div><button class="explain-btn" onclick="showExplanation('c3_36')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">printf</span>(<span class="co-string">"root is %d\n"</span>, <span class="co-var">root</span>-&gt;<span class="co-var">data</span>);</div><button class="explain-btn" onclick="showExplanation('c3_37')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">printf</span>(<span class="co-string">"Left node is %d\n"</span>, <span class="co-var">root</span>-&gt;<span class="co-var">left</span>-&gt;<span class="co-var">data</span>);</div><button class="explain-btn" onclick="showExplanation('c3_38')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">printf</span>(<span class="co-string">"right node is %d\n"</span>, <span class="co-var">root</span>-&gt;<span class="co-var">right</span>-&gt;<span class="co-var">data</span>);</div><button class="explain-btn" onclick="showExplanation('c3_39')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">return</span> <span class="co-number">0</span>;</div><button class="explain-btn" onclick="showExplanation('c3_40')">➔</button></div>
+                <div class="code-line"><div class="content-text">}</div><button class="explain-btn" onclick="showExplanation('c3_31')">➔</button></div>
+            </div>
+
+            <!-- 3.0.4 Full Code -->
+            <div id="sec-3-0-4" class="content-section code-section">
+                <h3>3.0.4 Full LL Code</h3>
+                
+                <div class="code-line"><div class="content-text"><span class="co-keyword">struct</span> <span class="co-func">node</span> {</div><button class="explain-btn" onclick="showExplanation('c3_1')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">struct</span> <span class="co-func">node</span> * <span class="co-var">left</span>;</div><button class="explain-btn" onclick="showExplanation('c3_2')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">int</span> <span class="co-var">data</span>;</div><button class="explain-btn" onclick="showExplanation('c3_3')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">struct</span> <span class="co-func">node</span> * <span class="co-var">right</span>;</div><button class="explain-btn" onclick="showExplanation('c3_4')">➔</button></div>
+                <div class="code-line"><div class="content-text">};</div><button class="explain-btn" onclick="showExplanation('c3_5')">➔</button></div>
+                <div class="code-line"><br></div>
+
+                <div class="code-line"><div class="content-text"><span class="co-keyword">struct</span> <span class="co-func">node</span>* <span class="co-func">createNode</span>(<span class="co-keyword">int</span> <span class="co-var">data</span>){</div><button class="explain-btn" onclick="showExplanation('c3_6')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">struct</span> <span class="co-func">node</span>* <span class="co-var">newNode</span> = <span class="co-func">malloc</span>(<span class="co-keyword">sizeof</span>(<span class="co-keyword">struct</span> <span class="co-func">node</span>));</div><button class="explain-btn" onclick="showExplanation('c3_7')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-var">newNode</span>-&gt;<span class="co-var">data</span> = <span class="co-var">data</span>;</div><button class="explain-btn" onclick="showExplanation('c3_8')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-var">newNode</span>-&gt;<span class="co-var">left</span> = <span class="co-keyword">NULL</span>;</div><button class="explain-btn" onclick="showExplanation('c3_9')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-var">newNode</span>-&gt;<span class="co-var">right</span> = <span class="co-keyword">NULL</span>;</div><button class="explain-btn" onclick="showExplanation('c3_10')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">return</span> <span class="co-var">newNode</span>;</div><button class="explain-btn" onclick="showExplanation('c3_11')">➔</button></div>
+                <div class="code-line"><div class="content-text">}</div><button class="explain-btn" onclick="showExplanation('c3_12')">➔</button></div>
+                <div class="code-line"><br></div>
+
+                <div class="code-line"><div class="content-text"><span class="co-keyword">struct</span> <span class="co-func">node</span> *<span class="co-func">createTree</span>(){</div><button class="explain-btn" onclick="showExplanation('c3_13')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">int</span> <span class="co-var">input</span>, <span class="co-var">data</span>;</div><button class="explain-btn" onclick="showExplanation('c3_14')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">printf</span>(<span class="co-string">"Do you want to enter data, 0 for No, 1 for yes: "</span>);</div><button class="explain-btn" onclick="showExplanation('c3_15')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">scanf</span>(<span class="co-string">"%d"</span>,&amp;<span class="co-var">input</span>);</div><button class="explain-btn" onclick="showExplanation('c3_16')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">if</span> (!<span class="co-var">input</span>)</div><button class="explain-btn" onclick="showExplanation('c3_17')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-keyword">return</span> <span class="co-keyword">NULL</span>;</div><button class="explain-btn" onclick="showExplanation('c3_18')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">else</span>{</div><button class="explain-btn" onclick="showExplanation('c3_19')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-keyword">struct</span> <span class="co-func">node</span> *<span class="co-var">newNode</span> = <span class="co-func">malloc</span>(<span class="co-keyword">sizeof</span>(<span class="co-keyword">struct</span> <span class="co-func">node</span>));</div><button class="explain-btn" onclick="showExplanation('c3_20')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-func">printf</span>(<span class="co-string">"Enter data: "</span>);</div><button class="explain-btn" onclick="showExplanation('c3_21')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-func">scanf</span>(<span class="co-string">"%d"</span>,&amp;<span class="co-var">data</span>);</div><button class="explain-btn" onclick="showExplanation('c3_22')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-var">newNode</span>-&gt;<span class="co-var">data</span> = <span class="co-var">data</span>;</div><button class="explain-btn" onclick="showExplanation('c3_23')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-func">printf</span>(<span class="co-string">"Left child of %d\n"</span>, <span class="co-var">newNode</span>-&gt;<span class="co-var">data</span>);</div><button class="explain-btn" onclick="showExplanation('c3_24')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-var">newNode</span>-&gt;<span class="co-var">left</span> = <span class="co-func">createTree</span>();</div><button class="explain-btn" onclick="showExplanation('c3_25')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-func">printf</span>(<span class="co-string">"Right child of %d\n"</span>, <span class="co-var">newNode</span>-&gt;<span class="co-var">data</span>);</div><button class="explain-btn" onclick="showExplanation('c3_26')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-var">newNode</span>-&gt;<span class="co-var">right</span> = <span class="co-func">createTree</span>();</div><button class="explain-btn" onclick="showExplanation('c3_27')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-keyword">return</span> <span class="co-var">newNode</span>;</div><button class="explain-btn" onclick="showExplanation('c3_28')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text">}</div><button class="explain-btn" onclick="showExplanation('c3_29')">➔</button></div>
+                <div class="code-line"><div class="content-text">}</div><button class="explain-btn" onclick="showExplanation('c3_30')">➔</button></div>
+                <div class="code-line"><br></div>
+
+                <div class="code-line"><div class="content-text"><span class="co-keyword">int</span> <span class="co-func">main</span>(){</div><button class="explain-btn" onclick="showExplanation('c3_31')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">struct</span> <span class="co-func">node</span>* <span class="co-var">root</span> = <span class="co-func">createNode</span>(<span class="co-number">10</span>);</div><button class="explain-btn" onclick="showExplanation('c3_32')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-var">root</span>-&gt;<span class="co-var">left</span> = <span class="co-func">createNode</span>(<span class="co-number">20</span>);</div><button class="explain-btn" onclick="showExplanation('c3_33')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-var">root</span>-&gt;<span class="co-var">right</span> = <span class="co-func">createNode</span>(<span class="co-number">30</span>);</div><button class="explain-btn" onclick="showExplanation('c3_34')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-var">root</span>-&gt;<span class="co-var">left</span>-&gt;<span class="co-var">left</span> = <span class="co-func">createNode</span>(<span class="co-number">40</span>);</div><button class="explain-btn" onclick="showExplanation('c3_35')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-var">root</span>-&gt;<span class="co-var">left</span>-&gt;<span class="co-var">right</span> = <span class="co-func">createNode</span>(<span class="co-number">50</span>);</div><button class="explain-btn" onclick="showExplanation('c3_36')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">printf</span>(<span class="co-string">"root is %d\n"</span>, <span class="co-var">root</span>-&gt;<span class="co-var">data</span>);</div><button class="explain-btn" onclick="showExplanation('c3_37')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">printf</span>(<span class="co-string">"Left node is %d\n"</span>, <span class="co-var">root</span>-&gt;<span class="co-var">left</span>-&gt;<span class="co-var">data</span>);</div><button class="explain-btn" onclick="showExplanation('c3_38')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">printf</span>(<span class="co-string">"right node is %d\n"</span>, <span class="co-var">root</span>-&gt;<span class="co-var">right</span>-&gt;<span class="co-var">data</span>);</div><button class="explain-btn" onclick="showExplanation('c3_39')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">return</span> <span class="co-number">0</span>;</div><button class="explain-btn" onclick="showExplanation('c3_40')">➔</button></div>
+                <div class="code-line"><div class="content-text">}</div><button class="explain-btn" onclick="showExplanation('c3_31')">➔</button></div>
+            </div>
+
+        </div>
+
+        <div class="right-pane">
+            <h3>Logical Breakdown</h3>
+            <div id="explanation-content">
+                <span class="placeholder-text">Click the ➔ arrow on any line to reveal the underlying logic here.</span>
+            </div>
+        </div>
+    </div>
+    <script src="database.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

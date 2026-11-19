@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Atomic Study - Array Trees</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Sidebar: Atomic Layout -->
+    <div class="sidebar" id="sidebar">
+        <h2>TREES</h2>
+        
+        <!-- Active Page: Arrays -->
+        <div class="syllabus-item">
+            <a href="index.html" class="syllabus-module active-module">1.0 & 2.0 ARRAYS</a>
+            
+            <div class="syllabus-subheading">GENERAL THEORY</div>
+            <div class="atomic-node active" data-target="sec-gen-theory-0">Non-Linear & Basics</div>
+            <div class="atomic-node" data-target="sec-gen-theory-1">Terminology & Properties</div>
+
+            <div class="syllabus-subheading">1.0 ARRAY THEORY</div>
+            <div class="atomic-node" data-target="sec-1-0-0">1.0.0 Array Implementation Theory</div>
+            
+            <div class="syllabus-subheading">2.0 INITIALISATION</div>
+            <div class="atomic-node" data-target="sec-2-0-0">2.0.0 Includes & Globals</div>
+            <div class="atomic-node" data-target="sec-2-0-1">2.0.1 Root Init</div>
+            <div class="atomic-node" data-target="sec-2-0-2">2.0.2 Set Left Child</div>
+            <div class="atomic-node" data-target="sec-2-0-3">2.0.3 Set Right Child</div>
+            <div class="atomic-node" data-target="sec-2-0-4">2.0.4 Main Driver</div>
+            <div class="atomic-node" data-target="sec-2-0-5">2.0.5 Full Code</div>
+        </div>
+
+        <!-- Inactive Pages -->
+        <div class="syllabus-item">
+            <a href="ll_impl.html" class="syllabus-module">3.0 LINKED LIST</a>
+        </div>
+
+        <div class="syllabus-item">
+            <a href="fbt_impl.html" class="syllabus-module">4.0 FULL BINARY TREE</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        
+        <button class="mobile-nav-btn" id="mobile-nav-btn">☰ Topics</button>
+
+        <!-- Left Pane: Material -->
+        <div class="left-pane" id="theory-pane">
+            
+            <!-- GENERAL THEORY -->
+            <div id="sec-gen-theory-0" class="content-section active">
+                <h3>Non-Linear Data Structures & Basics</h3>
+                <div class="theory-line">
+                    <div class="content-text">Trees are non-linear; data branches out instead of sitting in a sequence, drastically speeding up searches.</div>
+                    <button class="explain-btn" onclick="showExplanation('t1_1')">➔</button>
+                </div>
+                <div class="theory-line">
+                    <div class="content-text">A tree contains a root node, and remaining nodes partition into disjoint sets (subtrees).</div>
+                    <button class="explain-btn" onclick="showExplanation('t1_2')">➔</button>
+                </div>
+            </div>
+
+            <div id="sec-gen-theory-1" class="content-section">
+                <h3>Terminology & Properties</h3>
+                <div class="theory-line">
+                    <div class="content-text">Leaf nodes have no successors. Level = distance from root. Height = total levels. Depth = edges from root.</div>
+                    <button class="explain-btn" onclick="showExplanation('t1_3')">➔</button>
+                </div>
+                <div class="theory-line">
+                    <div class="content-text">Binary trees have utmost 2 children. Nodes at level 'L' = 2^L. Total edges 'e' = n - 1.</div>
+                    <button class="explain-btn" onclick="showExplanation('t1_4')">➔</button>
+                </div>
+            </div>
+
+            <!-- BINARY TREE: 1.0 THEORY -->
+            <div id="sec-1-0-0" class="content-section">
+                <h3>1.0.0 Array Implementation Theory</h3>
+                
+                <iframe src="animation.html" class="animation-embed" title="Tree to Array Mathematical Collapse"></iframe>
+
+                <div class="theory-line">
+                    <div class="content-text">0-Indexed Rule: Left child is at 2k+1. Right child is at 2k+2. Parent is at (k-1)/2.</div>
+                    <button class="explain-btn" onclick="showExplanation('t2_1')">➔</button>
+                </div>
+                <div class="theory-line">
+                    <div class="content-text">Array representation saves space (no pointers) but is terrible for skewed trees due to massive memory wastage.</div>
+                    <button class="explain-btn" onclick="showExplanation('t2_2')">➔</button>
+                </div>
+            </div>
+
+            <!-- BINARY TREE: 2.0 INITIALISATION -->
+            <div id="sec-2-0-0" class="content-section code-section">
+                <h3>2.0.0 Includes & Globals</h3>
+                <div class="code-line"><div class="content-text"><span class="co-comment">// Implementation of tree using array</span></div><button class="explain-btn" onclick="showExplanation('c1')">➔</button></div>
+                <div class="code-line"><div class="content-text"><span class="co-comment">// numbering starting from 0 to n-1.</span></div><button class="explain-btn" onclick="showExplanation('c2')">➔</button></div>
+                <div class="code-line"><div class="content-text"><span class="co-directive">#include&lt;bits/stdc++.h&gt;</span></div><button class="explain-btn" onclick="showExplanation('c3')">➔</button></div>
+                <div class="code-line"><div class="content-text"><span class="co-keyword">using namespace</span> <span class="co-var">std</span>;</div><button class="explain-btn" onclick="showExplanation('c4')">➔</button></div>
+                <div class="code-line"><br></div>
+                <div class="code-line"><div class="content-text"><span class="co-keyword">char</span> <span class="co-var">tree</span>[<span class="co-number">10</span>];</div><button class="explain-btn" onclick="showExplanation('c5')">➔</button></div>
+            </div>
+
+            <div id="sec-2-0-1" class="content-section code-section">
+                <h3>2.0.1 Root Init</h3>
+                <div class="code-line"><div class="content-text"><span class="co-keyword">int</span> <span class="co-func">root</span>(<span class="co-keyword">char</span> <span class="co-var">key</span>) {</div><button class="explain-btn" onclick="showExplanation('c6')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">if</span> (<span class="co-var">tree</span>[<span class="co-number">0</span>] != <span class="co-string">'\0'</span>)</div><button class="explain-btn" onclick="showExplanation('c7')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-func">cout</span> &lt;&lt; <span class="co-string">"Tree already had root"</span>;</div><button class="explain-btn" onclick="showExplanation('c8')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">else</span></div><button class="explain-btn" onclick="showExplanation('c9')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-var">tree</span>[<span class="co-number">0</span>] = <span class="co-var">key</span>;</div><button class="explain-btn" onclick="showExplanation('c10')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">return</span> <span class="co-number">0</span>;</div><button class="explain-btn" onclick="showExplanation('c11')">➔</button></div>
+                <div class="code-line"><div class="content-text">}</div><button class="explain-btn" onclick="showExplanation('c12')">➔</button></div>
+            </div>
+
+            <div id="sec-2-0-2" class="content-section code-section">
+                <h3>2.0.2 Set Left Child</h3>
+                <div class="code-line"><div class="content-text"><span class="co-keyword">int</span> <span class="co-func">set_left</span>(<span class="co-keyword">char</span> <span class="co-var">key</span>, <span class="co-keyword">int</span> <span class="co-var">parent</span>) {</div><button class="explain-btn" onclick="showExplanation('c13')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">if</span> (<span class="co-var">tree</span>[<span class="co-var">parent</span>] == <span class="co-string">'\0'</span>)</div><button class="explain-btn" onclick="showExplanation('c14')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-func">cout</span> &lt;&lt; <span class="co-string">"\nCan't set child at "</span> &lt;&lt; (<span class="co-var">parent</span> * <span class="co-number">2</span>) + <span class="co-number">1</span> &lt;&lt; <span class="co-string">", no parent found"</span>;</div><button class="explain-btn" onclick="showExplanation('c15')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">else</span></div><button class="explain-btn" onclick="showExplanation('c18')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-var">tree</span>[(<span class="co-var">parent</span> * <span class="co-number">2</span>) + <span class="co-number">1</span>] = <span class="co-var">key</span>;</div><button class="explain-btn" onclick="showExplanation('c19')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">return</span> <span class="co-number">0</span>;</div><button class="explain-btn" onclick="showExplanation('c20')">➔</button></div>
+                <div class="code-line"><div class="content-text">}</div><button class="explain-btn" onclick="showExplanation('c21')">➔</button></div>
+            </div>
+
+            <div id="sec-2-0-3" class="content-section code-section">
+                <h3>2.0.3 Set Right Child</h3>
+                <div class="code-line"><div class="content-text"><span class="co-keyword">int</span> <span class="co-func">set_right</span>(<span class="co-keyword">char</span> <span class="co-var">key</span>, <span class="co-keyword">int</span> <span class="co-var">parent</span>) {</div><button class="explain-btn" onclick="showExplanation('c22')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">if</span> (<span class="co-var">tree</span>[<span class="co-var">parent</span>] == <span class="co-string">'\0'</span>)</div><button class="explain-btn" onclick="showExplanation('c23')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-func">cout</span> &lt;&lt; <span class="co-string">"\nCan't set child at "</span> &lt;&lt; (<span class="co-var">parent</span> * <span class="co-number">2</span>) + <span class="co-number">2</span> &lt;&lt; <span class="co-string">", no parent found"</span>;</div><button class="explain-btn" onclick="showExplanation('c24')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">else</span></div><button class="explain-btn" onclick="showExplanation('c27')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-var">tree</span>[(<span class="co-var">parent</span> * <span class="co-number">2</span>) + <span class="co-number">2</span>] = <span class="co-var">key</span>;</div><button class="explain-btn" onclick="showExplanation('c28')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">return</span> <span class="co-number">0</span>;</div><button class="explain-btn" onclick="showExplanation('c29')">➔</button></div>
+                <div class="code-line"><div class="content-text">}</div><button class="explain-btn" onclick="showExplanation('c30')">➔</button></div>
+            </div>
+
+            <div id="sec-2-0-4" class="content-section code-section">
+                <h3>2.0.4 Main Driver</h3>
+                <div class="code-line"><div class="content-text"><span class="co-comment">// Driver Code</span></div><button class="explain-btn" onclick="showExplanation('c31')">➔</button></div>
+                <div class="code-line"><div class="content-text"><span class="co-keyword">int</span> <span class="co-func">main</span>() {</div><button class="explain-btn" onclick="showExplanation('c32')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">root</span>(<span class="co-string">'A'</span>);</div><button class="explain-btn" onclick="showExplanation('c33')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">set_left</span>(<span class="co-string">'B'</span>,<span class="co-number">0</span>);</div><button class="explain-btn" onclick="showExplanation('c34')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">set_right</span>(<span class="co-string">'C'</span>, <span class="co-number">0</span>);</div><button class="explain-btn" onclick="showExplanation('c35')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">set_left</span>(<span class="co-string">'D'</span>, <span class="co-number">1</span>);</div><button class="explain-btn" onclick="showExplanation('c36')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">set_right</span>(<span class="co-string">'E'</span>, <span class="co-number">1</span>);</div><button class="explain-btn" onclick="showExplanation('c37')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">set_right</span>(<span class="co-string">'F'</span>, <span class="co-number">2</span>);</div><button class="explain-btn" onclick="showExplanation('c38')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">print_tree</span>();</div><button class="explain-btn" onclick="showExplanation('c39')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">return</span> <span class="co-number">0</span>;</div><button class="explain-btn" onclick="showExplanation('c40')">➔</button></div>
+                <div class="code-line"><div class="content-text">}</div><button class="explain-btn" onclick="showExplanation('c41')">➔</button></div>
+            </div>
+
+            <!-- FULL CODE AGGREGATION -->
+            <div id="sec-2-0-5" class="content-section code-section">
+                <h3>2.0.5 Full Code</h3>
+                <!-- Globals -->
+                <div class="code-line"><div class="content-text"><span class="co-comment">// Implementation of tree using array</span></div><button class="explain-btn" onclick="showExplanation('c1')">➔</button></div>
+                <div class="code-line"><div class="content-text"><span class="co-comment">// numbering starting from 0 to n-1.</span></div><button class="explain-btn" onclick="showExplanation('c2')">➔</button></div>
+                <div class="code-line"><div class="content-text"><span class="co-directive">#include&lt;bits/stdc++.h&gt;</span></div><button class="explain-btn" onclick="showExplanation('c3')">➔</button></div>
+                <div class="code-line"><div class="content-text"><span class="co-keyword">using namespace</span> <span class="co-var">std</span>;</div><button class="explain-btn" onclick="showExplanation('c4')">➔</button></div>
+                <div class="code-line"><div class="content-text"><span class="co-keyword">char</span> <span class="co-var">tree</span>[<span class="co-number">10</span>];</div><button class="explain-btn" onclick="showExplanation('c5')">➔</button></div>
+                <div class="code-line"><br></div>
+
+                <!-- Root -->
+                <div class="code-line"><div class="content-text"><span class="co-keyword">int</span> <span class="co-func">root</span>(<span class="co-keyword">char</span> <span class="co-var">key</span>) {</div><button class="explain-btn" onclick="showExplanation('c6')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">if</span> (<span class="co-var">tree</span>[<span class="co-number">0</span>] != <span class="co-string">'\0'</span>)</div><button class="explain-btn" onclick="showExplanation('c7')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-func">cout</span> &lt;&lt; <span class="co-string">"Tree already had root"</span>;</div><button class="explain-btn" onclick="showExplanation('c8')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">else</span></div><button class="explain-btn" onclick="showExplanation('c9')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-var">tree</span>[<span class="co-number">0</span>] = <span class="co-var">key</span>;</div><button class="explain-btn" onclick="showExplanation('c10')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">return</span> <span class="co-number">0</span>;</div><button class="explain-btn" onclick="showExplanation('c11')">➔</button></div>
+                <div class="code-line"><div class="content-text">}</div><button class="explain-btn" onclick="showExplanation('c12')">➔</button></div>
+                <div class="code-line"><br></div>
+
+                <!-- Left Child -->
+                <div class="code-line"><div class="content-text"><span class="co-keyword">int</span> <span class="co-func">set_left</span>(<span class="co-keyword">char</span> <span class="co-var">key</span>, <span class="co-keyword">int</span> <span class="co-var">parent</span>) {</div><button class="explain-btn" onclick="showExplanation('c13')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">if</span> (<span class="co-var">tree</span>[<span class="co-var">parent</span>] == <span class="co-string">'\0'</span>)</div><button class="explain-btn" onclick="showExplanation('c14')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-func">cout</span> &lt;&lt; <span class="co-string">"\nCan't set child at "</span> &lt;&lt; (<span class="co-var">parent</span> * <span class="co-number">2</span>) + <span class="co-number">1</span> &lt;&lt; <span class="co-string">", no parent found"</span>;</div><button class="explain-btn" onclick="showExplanation('c15')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">else</span></div><button class="explain-btn" onclick="showExplanation('c18')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-var">tree</span>[(<span class="co-var">parent</span> * <span class="co-number">2</span>) + <span class="co-number">1</span>] = <span class="co-var">key</span>;</div><button class="explain-btn" onclick="showExplanation('c19')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">return</span> <span class="co-number">0</span>;</div><button class="explain-btn" onclick="showExplanation('c20')">➔</button></div>
+                <div class="code-line"><div class="content-text">}</div><button class="explain-btn" onclick="showExplanation('c21')">➔</button></div>
+                <div class="code-line"><br></div>
+
+                <!-- Right Child -->
+                <div class="code-line"><div class="content-text"><span class="co-keyword">int</span> <span class="co-func">set_right</span>(<span class="co-keyword">char</span> <span class="co-var">key</span>, <span class="co-keyword">int</span> <span class="co-var">parent</span>) {</div><button class="explain-btn" onclick="showExplanation('c22')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">if</span> (<span class="co-var">tree</span>[<span class="co-var">parent</span>] == <span class="co-string">'\0'</span>)</div><button class="explain-btn" onclick="showExplanation('c23')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-func">cout</span> &lt;&lt; <span class="co-string">"\nCan't set child at "</span> &lt;&lt; (<span class="co-var">parent</span> * <span class="co-number">2</span>) + <span class="co-number">2</span> &lt;&lt; <span class="co-string">", no parent found"</span>;</div><button class="explain-btn" onclick="showExplanation('c24')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">else</span></div><button class="explain-btn" onclick="showExplanation('c27')">➔</button></div>
+                <div class="code-line indent-2"><div class="content-text"><span class="co-var">tree</span>[(<span class="co-var">parent</span> * <span class="co-number">2</span>) + <span class="co-number">2</span>] = <span class="co-var">key</span>;</div><button class="explain-btn" onclick="showExplanation('c28')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">return</span> <span class="co-number">0</span>;</div><button class="explain-btn" onclick="showExplanation('c29')">➔</button></div>
+                <div class="code-line"><div class="content-text">}</div><button class="explain-btn" onclick="showExplanation('c30')">➔</button></div>
+                <div class="code-line"><br></div>
+
+                <!-- Main Driver -->
+                <div class="code-line"><div class="content-text"><span class="co-comment">// Driver Code</span></div><button class="explain-btn" onclick="showExplanation('c31')">➔</button></div>
+                <div class="code-line"><div class="content-text"><span class="co-keyword">int</span> <span class="co-func">main</span>() {</div><button class="explain-btn" onclick="showExplanation('c32')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">root</span>(<span class="co-string">'A'</span>);</div><button class="explain-btn" onclick="showExplanation('c33')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">set_left</span>(<span class="co-string">'B'</span>,<span class="co-number">0</span>);</div><button class="explain-btn" onclick="showExplanation('c34')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">set_right</span>(<span class="co-string">'C'</span>, <span class="co-number">0</span>);</div><button class="explain-btn" onclick="showExplanation('c35')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">set_left</span>(<span class="co-string">'D'</span>, <span class="co-number">1</span>);</div><button class="explain-btn" onclick="showExplanation('c36')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">set_right</span>(<span class="co-string">'E'</span>, <span class="co-number">1</span>);</div><button class="explain-btn" onclick="showExplanation('c37')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">set_right</span>(<span class="co-string">'F'</span>, <span class="co-number">2</span>);</div><button class="explain-btn" onclick="showExplanation('c38')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-func">print_tree</span>();</div><button class="explain-btn" onclick="showExplanation('c39')">➔</button></div>
+                <div class="code-line indent-1"><div class="content-text"><span class="co-keyword">return</span> <span class="co-number">0</span>;</div><button class="explain-btn" onclick="showExplanation('c40')">➔</button></div>
+                <div class="code-line"><div class="content-text">}</div><button class="explain-btn" onclick="showExplanation('c41')">➔</button></div>
+            </div>
+
+        </div>
+
+        <!-- Right Pane: Logic Explanations -->
+        <div class="right-pane">
+            <h3>Logical Breakdown</h3>
+            <div id="explanation-content">
+                <span class="placeholder-text">Click the ➔ arrow on any line to reveal the underlying logic here.</span>
+            </div>
+        </div>
+        
+    </div>
+
+    <script src="database.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
