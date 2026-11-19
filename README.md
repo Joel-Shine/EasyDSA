@@ -1,7 +1,7 @@
 <h1 align="center"> EasyDSA </h1>
 
 ## ✨ Overview
-A quality collection of websites having line-by-line code explanation and illustrations for the most fundamental data structures and algorithms of computer science.
+A quality collection of websites having line-by-line code explanation and illustrations for the most fundamental data structures and algorithms of computer science. <br>
 Code rendered in C
 Home Website -> [https://joel-shine.github.io/EasyDSA](https://joelshine.github.io/EasyDSA)
 
